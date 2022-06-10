@@ -1,0 +1,101 @@
+buildscript {
+    ext {
+        springBootVersion = '2.3.12.RELEASE'
+        querydslPluginVersion = '1.0.10'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.freefair.gradle:lombok-plugin:5.1.0"
+    }
+}
+
+plugins {
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'io.freefair.lombok'
+
+group = 'kr.co.tbase'
+version = '0.0.1-SNAPSHOT'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    maven {
+        credentials {
+            username repositoryPublishUser
+            password repositoryPublishPassword
+        }
+        url "http://10.205.3.24:8081/repository/dbase-releases/"
+        allowInsecureProtocol = true
+    }
+    maven {
+        credentials {
+            username repositoryPublishUser
+            password repositoryPublishPassword
+        }
+        url "http://10.205.3.24:8081/repository/dbase-snapshots/"
+        allowInsecureProtocol = true
+    }
+}
+
+dependencies {
+    implementation project(':common-module:create-dtostructure-constant')
+    annotationProcessor project(':common-module:create-dtostructure-constant')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+
+    implementation 'com.squareup:javapoet:1.13.0'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    implementation 'org.modelmapper:modelmapper:2.3.9'
+
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    // oauth2 library
+    implementation 'kr.co.tbase.oauth2:TBaseOAuth2ResourceLib:0.0.1'
+//    implementation 'kr.co.tbase.oauth2:TBaseOAuth2ResourceLib_JDK11_SB2.2_3:1.2.0'
+    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-security'
+}
+
+ext {
+    set('springCloudVersion', "Hoxton.SR11")
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '6.8'
+}
+
+tasks.register("prepareKotlinBuildScriptModel") {}
+
+

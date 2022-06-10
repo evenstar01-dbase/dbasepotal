@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'kr.co.tbase'
+version '1.0-SNAPSHOT'
+
+ext {
+    junitVersion = '5.8.2'
+}
+
+dependencies {
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    implementation 'com.google.auto.service:auto-service:1.0.1'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0.1'
+
+//    implementation "io.springfox:springfox-boot-starter"
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    implementation 'com.squareup:javapoet:1.13.0'
+
+    implementation 'org.apache.commons:commons-text:1.9'
+
+    testImplementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.9'
+    testImplementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.9'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+test {
+    useJUnitPlatform()
+}

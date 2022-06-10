@@ -1,0 +1,4 @@
+rootProject.name = 'backend_skel'
+include 'api-module'
+include 'common-module'
+include 'common-module:create-dtostructure-constant'

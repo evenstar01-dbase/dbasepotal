@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.sample.SampleMapper">
+  <select id="selectList" resultType="kr.co.tbase.api.module.dto.sample.SampleDto">
+    SELECT member_id
+         , name
+    FROM sample_member
+  </select>
+
+  <insert id="insertSample" parameterType="kr.co.tbase.api.module.dto.sample.SampleDto" useGeneratedKeys="true" keyProperty="memberId">
+    INSERT INTO sample_member
+      (name)
+    VALUES(#{name})
+  </insert>
+
+  <delete id="deleteSample" parameterType="Long">
+    DELETE FROM sample_member WHERE member_id = #{id}
+  </delete>
+
+  <update id="updateSample" parameterType="kr.co.tbase.api.module.dto.sample.SampleDto">
+    UPDATE mbase_db.sample_member
+       SET name=#{name}
+     WHERE member_id=#{memberId};
+  </update>
+</mapper>
