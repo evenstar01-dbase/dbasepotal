@@ -21,7 +21,6 @@ spring:
       force: true
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
     hibernate:
       ddl-auto: create # 실제 사용 시 validate 값 사용
     properties:

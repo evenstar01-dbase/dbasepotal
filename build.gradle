@@ -1,5 +1,10 @@
 apply plugin: 'base'
 
+ext {
+    springBootVersion = "2.3.12.RELEASE"
+    lombokVersion = "1.18.22"
+}
+
 subprojects {
     apply plugin: "java"
 

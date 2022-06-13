@@ -1,36 +1,10 @@
-buildscript {
-    ext {
-        springBootVersion = '2.3.12.RELEASE'
-        querydslPluginVersion = '1.0.10'
-    }
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath "io.freefair.gradle:lombok-plugin:5.1.0"
-    }
-}
-
 plugins {
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
-
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'io.freefair.lombok'
 
 group = 'kr.co.tbase'
 version = '0.0.1-SNAPSHOT'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
 
 repositories {
     maven {
